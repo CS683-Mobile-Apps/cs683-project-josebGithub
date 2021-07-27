@@ -1,3 +1,50 @@
 <resources>
-    <string name="app_name">Activity Lifecycle</string>
+    <string name="app_name">MyFoodManager</string>
+
+    <string name="food_name_label">Food Name : </string>
+    <string name="food_type_label">Food Type :</string>
+    <string name="expiry_date_label">Expiry Date : </string>
+    <string name="quantity_label">Quantity :</string>
+    <string name="cost_label">Cost :</string>
+
+    <string name="select_date">Select Date</string>
+
+    <string name="save_button">Save</string>
+
+
+    <string-array name="food_spaces">
+        <item>REFRIGERATOR</item>
+        <item>FREEZER</item>
+        <item>PANTRY</item>
+        <item>KITCHEN CABINET</item>
+    </string-array>
+
+    <string-array name="fridge_food_list">
+        <item>Cheddar cheese</item>
+        <item>Eggs</item>
+        <item>Milk</item>
+        <item>Apples</item>
+    </string-array>
+
+
+    <string-array name="food_type_list">
+        <item>Select</item>
+        <item>grains</item>
+        <item>beans</item>
+        <item>nuts</item>
+        <item>meat</item>
+        <item>poultry</item>
+        <item>fish</item>
+        <item>seafood</item>
+        <item>dairy</item>
+        <item>drinks</item>
+        <item>fruits</item>
+        <item>vegetables</item>
+        <item>herbs and spices</item>
+    </string-array>
+
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+
 </resources>

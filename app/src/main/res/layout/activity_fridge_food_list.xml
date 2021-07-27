@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android" -->
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".RefrigeratorFoodListActivity">
+
+    <!--
+    <FrameLayout
+        android:id="@+id/fridge_frame_layout"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentLeft="true"/>
+     -->
+
+    <fragment
+        android:id="@+id/fridgeListFragment"
+        android:name="edu.bu.metcs.myproject.RefrigeratorFoodListFragment"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        tools:layout="@layout/fridge_food_list_fragment"/>
+
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/add_float_button"
+        android:layout_width="wrap_content"
+        android:layout_height="73dp"
+        android:layout_gravity="bottom|end"
+        android:clickable="true"
+        app:srcCompat="@android:drawable/ic_input_add" />
+
+
+</LinearLayout>
