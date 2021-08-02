@@ -15,6 +15,8 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
+import edu.bu.metcs.myproject.Database.MyFoodManagerDao;
+
 public class AddFridgeFoodItemsActivity extends AppCompatActivity {
 
     private final static String TAG = AddFridgeFoodItemsActivity.class.getSimpleName ();
@@ -54,7 +56,8 @@ public class AddFridgeFoodItemsActivity extends AppCompatActivity {
 
          EditText expiryDateView = findViewById(R.id.expiryDateId);
          String cExpiryDate = expiryDateView.getText().toString();
-         Date expiryDate = new SimpleDateFormat("MM/dd/yyyy").parse(cExpiryDate);
+         //Date expiryDate = new SimpleDateFormat("MM/dd/yyyy").parse(cExpiryDate);
+         Log.d(TAG, "expiryDate : "+ cExpiryDate);
 
          EditText quantityEditView = findViewById(R.id.quantityId);
          String quantity = quantityEditView.getText().toString();
@@ -72,17 +75,16 @@ public class AddFridgeFoodItemsActivity extends AppCompatActivity {
             }
          }
 
-        FoodItem foodItems = new FoodItem(foodName, foodType, expiryDate, quantity, cost);
-        for (int i=0; i<FoodSpace.foodSpaces.length;i++) {
-            if (FoodSpace.foodSpaces[i].getTitle().equals("REFRIGERATOR")) {
-                Log.d(TAG, "Add Food Item");
-                FoodSpace.foodSpaces[i].foodItems.add(foodItems);
-                break;
-            }
-        }
+        int foodspaceId = getIntent().getExtras().getInt("addfoodspaceId");
+        MyFoodManagerDao myFoodManagerDao = MyFoodManagerDao.getInstance(getApplicationContext());
+        FoodItem foodItems = new FoodItem(foodspaceId, foodName, foodType, cExpiryDate, quantity, cost);
+        myFoodManagerDao.addFoodItem(foodspaceId, foodItems);
+        Log.d(TAG, "Add Food Item");
+        FoodSpace.foodSpaces[foodspaceId].foodItems.add(foodItems);
 
         Log.d(TAG, "Call RefrigeratorFoodListActivity.class");
         Intent intent = new Intent(this, RefrigeratorFoodListActivity.class);
+        intent.putExtra("FOODSPACE_ID", foodspaceId);
         startActivity(intent);
     }
 

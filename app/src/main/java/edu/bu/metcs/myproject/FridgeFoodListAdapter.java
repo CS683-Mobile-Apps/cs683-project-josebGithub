@@ -14,16 +14,21 @@ import androidx.recyclerview.widget.RecyclerView;
 import java.text.ParseException;
 import java.util.ArrayList;
 
+import edu.bu.metcs.myproject.Database.MyFoodManagerDao;
+
 public class FridgeFoodListAdapter extends RecyclerView.Adapter<FridgeFoodListAdapter.FridgeFoodListViewHolder>{
 
 private final static String TAG = FridgeFoodListAdapter.class.getSimpleName ();
 private ArrayList<FoodItem> foodItems;
 private Listener listener;
-private ImageView mEditImage;
+
+
+//private ImageView mEditImage, mDeleteImage;
 
     public interface Listener {
-        void onClick(int position);
-        void onEditClick(int position) throws ParseException;
+      //  void onClick(int position);
+        void onEditClick(int position, int foodspaceId) throws ParseException;
+        void onDeleteClick(int position, int foodspaceId) throws ParseException;
     }
 
     public FridgeFoodListAdapter(ArrayList<FoodItem> foodItems) {
@@ -34,7 +39,7 @@ private ImageView mEditImage;
     @Override
     public FridgeFoodListViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         CardView cardView = (CardView) LayoutInflater.from(parent.getContext()).inflate(R.layout.fridge_food_list, parent, false);
-        return new FridgeFoodListViewHolder(cardView, listener);
+        return new FridgeFoodListViewHolder(cardView, listener, foodItems);
     }
 
     @Override
@@ -46,20 +51,6 @@ private ImageView mEditImage;
         TextView textView = (TextView) cardView.findViewById(R.id.foodNameTextViewId);
         Log.d(TAG, "foodItem.getName : "+foodItems.get(position).getName());
         textView.setText(foodItems.get(position).getName());
-
-
-        cardView.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                listener = (Listener)view.getContext();
-                if (listener !=null ) {
-                    Log.d(TAG, "OnClick(position) : "+ position);
-                    listener.onClick(position);
-                }
-            }
-        });
-
-
     }
 
 
@@ -73,9 +64,9 @@ public static class FridgeFoodListViewHolder extends RecyclerView.ViewHolder  {
 
     private TextView fridgeFoodListView;
     private CardView fridgeFoodListCardView;
-    private ImageView mEditImage;
+    private ImageView mEditImage, mDeleteImage;
 
-    public FridgeFoodListViewHolder(View itemView, final Listener listener1) {
+    public FridgeFoodListViewHolder(View itemView, final Listener listener1, final ArrayList<FoodItem> foodItems) {
         super(itemView);
         fridgeFoodListCardView = (CardView)itemView;
         fridgeFoodListView = (TextView) itemView.findViewById(R.id.foodNameTextViewId);
@@ -90,16 +81,33 @@ public static class FridgeFoodListViewHolder extends RecyclerView.ViewHolder  {
                   //  int itemId = position;
                     if (position != RecyclerView.NO_POSITION) {
                         try {
-                            listener1.onEditClick(position);
+                            listener1.onEditClick(foodItems.get(position).getId(), foodItems.get(position).getSpaceId());
                         } catch (ParseException e) {
                             e.printStackTrace();
                         }
                         //listener1.onEditClick(position, 0, itemId);
                     }
                 }
-
             }
         });
+
+        mDeleteImage = itemView.findViewById(R.id.delete_image);
+        mDeleteImage.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (listener1 != null) {
+                    int position = getAdapterPosition();
+                    if (position != RecyclerView.NO_POSITION) {
+                        try {
+                            listener1.onDeleteClick(foodItems.get(position).getId(), foodItems.get(position).getSpaceId());
+                        } catch (ParseException e) {
+                            e.printStackTrace();
+                        }
+                    }
+                }
+            }
+        });
+
     }
 }
 

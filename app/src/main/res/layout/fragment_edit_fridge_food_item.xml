@@ -138,6 +138,7 @@
 
     </LinearLayout>
 
+  <!--
     <Button
         android:id="@+id/editFridgeFoodItemsubmitBtnId"
         android:layout_width="91dp"
@@ -148,6 +149,7 @@
         android:onClick="onClickSave"
         android:text="@string/save_button" />
 
+        -->
 
 </LinearLayout>
 

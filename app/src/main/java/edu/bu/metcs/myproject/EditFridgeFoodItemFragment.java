@@ -24,6 +24,8 @@ import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
 
+import edu.bu.metcs.myproject.Database.MyFoodManagerDao;
+
 /**
  * A simple {@link Fragment} subclass.
  * Use the {@link EditFridgeFoodItemFragment#} factory method to
@@ -38,6 +40,8 @@ public class EditFridgeFoodItemFragment extends Fragment {
     private String foodType;
     private int foodspaceId;
     private int itemId;
+    MyFoodManagerDao myFoodManagerDao;
+    private FoodItem foodItem;
 
 
     public EditFridgeFoodItemFragment() {
@@ -51,11 +55,6 @@ public class EditFridgeFoodItemFragment extends Fragment {
 
 
         final EditText expiryDate;
-        final DatePickerDialog[] datePickerDialog = new DatePickerDialog[1];
-
-        // Inflate the layout for this fragment
-        //  return inflater.inflate(R.layout.fragment_edit_fridge_food_item, container, false);
-
 
         View view = inflater.inflate(R.layout.fragment_edit_fridge_food_item, container, false);
 
@@ -101,7 +100,7 @@ public class EditFridgeFoodItemFragment extends Fragment {
                 final int mMonth = c.get(Calendar.MONTH); // current month
                 final int mDay = c.get(Calendar.DAY_OF_MONTH); // current day
                 // date picker dialog
-                datePickerDialog[0] = new DatePickerDialog(requireContext(),
+                DatePickerDialog datePickerDialog = new DatePickerDialog(requireContext(),
                         new DatePickerDialog.OnDateSetListener() {
 
                             @Override
@@ -111,20 +110,23 @@ public class EditFridgeFoodItemFragment extends Fragment {
                                         + dayOfMonth + "/" + year);
                             }
                         }, mYear, mMonth, mDay);
-                datePickerDialog[0].show();
+                datePickerDialog.show();
             }
         });
 
         if (getArguments() != null) {
-            foodspaceId = (int)getArguments().getInt("foodspaceId");
-            itemId = (int)getArguments().getInt("itemId");
-            Log.d(TAG, "foodspaceId : "+foodspaceId+"   ItemId : "+itemId);
+            foodspaceId = (int) getArguments().getInt("foodspaceId");
+            itemId = (int) getArguments().getInt("itemId");
+            Log.d(TAG, "foodspaceId : " + foodspaceId + "   ItemId : " + itemId);
         } else {
-            foodspaceId=0;
+            foodspaceId = 0;
             itemId = 0;
         }
 
-        Log.d(TAG, "SetFridgeFoodItemView ->   foodspaceId : "+foodspaceId+"   ItemId : "+itemId);
+        Log.d(TAG, "SetFridgeFoodItemView ->   foodspaceId : " + foodspaceId + "   ItemId : " + itemId);
+        myFoodManagerDao = myFoodManagerDao.getInstance(getContext());
+        foodItem = myFoodManagerDao.getFoodItemById(itemId, foodspaceId);
+
         try {
             setFridgeFoodItemView(foodspaceId, itemId);
         } catch (ParseException e) {
@@ -135,22 +137,13 @@ public class EditFridgeFoodItemFragment extends Fragment {
 
 
     public void setFridgeFoodItemView(int foodspaceId, int itemId) throws ParseException {
-        foodNameTextView.setText(FoodSpace.foodSpaces[foodspaceId].foodItems.get(itemId).getName());
-        foodTypeTextView.setText(FoodSpace.foodSpaces[foodspaceId].foodItems.get(itemId).getType());
-        String eDate = FoodSpace.foodSpaces[foodspaceId].foodItems.get(itemId).getExpirationDate().toString();
-        SimpleDateFormat sdf=new SimpleDateFormat("E MMM dd HH:mm:ss z yyyy");
-        Date expiryDate=sdf.parse(eDate);
-        SimpleDateFormat sdf2=new SimpleDateFormat("MM/dd/yyyy");
-        Log.d(TAG, "EXPIRY DATE : "+sdf2.format(expiryDate));
-       // Date expiryDate = new SimpleDateFormat("MM/dd/yyyy").parse(FoodSpace.foodSpaces[foodspaceId].foodItems.get(itemId).getExpirationDate().toString());
-        Log.d(TAG, "Expiry Date : "+expiryDate.toString());
-        expiryDateTextView.setText(sdf2.format(expiryDate));
-        quantityTextView.setText(FoodSpace.foodSpaces[foodspaceId].foodItems.get(itemId).getQuantity());
-        costTextView.setText(Double.toString(FoodSpace.foodSpaces[foodspaceId].foodItems.get(itemId).getCost()));
+        foodNameTextView.setText(foodItem.getName());
+        foodTypeTextView.setText(foodItem.getType());
+        String eDate = foodItem.getExpirationDate().toString();
+        Log.d(TAG, "eDate : " + eDate);
+        expiryDateTextView.setText(foodItem.getExpirationDate());
+        quantityTextView.setText(foodItem.getQuantity());
+        costTextView.setText(Double.toString(foodItem.getCost()));
     }
 
-
-    public void onClickSave(View view) {
-
-    }
 }

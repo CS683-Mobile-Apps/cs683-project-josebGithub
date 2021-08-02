@@ -48,7 +48,6 @@ public class AddFridgeFoodItemsFragment extends Fragment {
         // Inflate the layout for this fragment
 
         final EditText expiryDate;
-        final DatePickerDialog[] datePickerDialog = new DatePickerDialog[1];
 
         View view = inflater.inflate(R.layout.fragment_add_fridge_food_items, container, false);
 
@@ -91,8 +90,9 @@ public class AddFridgeFoodItemsFragment extends Fragment {
                 final int mYear = c.get(Calendar.YEAR); // current year
                 final int mMonth = c.get(Calendar.MONTH); // current month
                 final int mDay = c.get(Calendar.DAY_OF_MONTH); // current day
+
                 // date picker dialog
-                datePickerDialog[0] = new DatePickerDialog(requireContext(),
+                DatePickerDialog datePickerDialog = new DatePickerDialog(requireContext(),
                         new DatePickerDialog.OnDateSetListener() {
 
                             @Override
@@ -102,7 +102,7 @@ public class AddFridgeFoodItemsFragment extends Fragment {
                                         + dayOfMonth + "/" + year);
                             }
                         }, mYear, mMonth, mDay);
-                datePickerDialog[0].show();
+                datePickerDialog.show();
             }
         });
         return view;

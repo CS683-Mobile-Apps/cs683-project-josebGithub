@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!-- <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android" -->
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
@@ -17,6 +17,16 @@
         android:layout_alignParentLeft="true"/>
      -->
 
+    <FrameLayout
+        android:id="@+id/fridgeFoodListContainer"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent">
+    </FrameLayout>
+
+  <!--
     <fragment
         android:id="@+id/fridgeListFragment"
         android:name="edu.bu.metcs.myproject.RefrigeratorFoodListFragment"
@@ -25,13 +35,45 @@
         android:layout_weight="1"
         tools:layout="@layout/fridge_food_list_fragment"/>
 
+   -->
+    <!--
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/add_float_button"
         android:layout_width="wrap_content"
         android:layout_height="73dp"
         android:layout_gravity="bottom|end"
+        android:layout_marginEnd="33dp"
+        android:layout_marginRight="36dp"
+        android:layout_marginBottom="55dp"
         android:clickable="true"
+        app:srcCompat="@android:drawable/ic_input_add" />
+  -->
+
+
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/add_float_button"
+        android:layout_width="wrap_content"
+        android:layout_height="100dip"
+        android:layout_gravity="end|bottom"
         app:srcCompat="@android:drawable/ic_input_add" />
 
 
-</LinearLayout>
+    <!--
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dip"
+        android:layout_weight="1"
+        android:gravity="end|bottom"
+        android:orientation="vertical" >
+
+        <com.google.android.material.floatingactionbutton.FloatingActionButton
+            android:id="@+id/add_float_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="end|bottom"
+            android:clickable="true"
+            app:srcCompat="@android:drawable/ic_input_add" />
+    </LinearLayout>
+    -->
+
+</FrameLayout>

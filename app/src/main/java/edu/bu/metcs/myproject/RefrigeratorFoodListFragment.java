@@ -2,6 +2,7 @@ package edu.bu.metcs.myproject;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -15,13 +16,18 @@ import androidx.fragment.app.ListFragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import java.util.ArrayList;
+
+import edu.bu.metcs.myproject.Database.MyFoodManagerDao;
+
 
 /**
  * This class is to a list fragment for the Refrigerator food list page
  */
 public class RefrigeratorFoodListFragment extends Fragment {
 
-    private final static String TAG = HomePageListFragment.class.getSimpleName ();
+    private final static String TAG = RefrigeratorFoodListFragment.class.getSimpleName ();
+    MyFoodManagerDao myFoodManagerDao;
     ListView listview;
     View view;
 
@@ -31,11 +37,19 @@ public class RefrigeratorFoodListFragment extends Fragment {
 
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState)
     {
+        myFoodManagerDao = myFoodManagerDao.getInstance(getContext());
+        myFoodManagerDao.openDB();
+
+        int foodspaceId = getArguments().getInt("FOODSPACE_ID");
+        Log.d(TAG, "FOODSPACE_ID : "+foodspaceId);
+
+        ArrayList<FoodItem> foodItems=myFoodManagerDao.getAllFoodItems(foodspaceId);
+
         view = inflater.inflate(R.layout.fridge_food_list_fragment, container, false);
 
         RecyclerView fridgeFoodListRecyclerView = (RecyclerView) (view.findViewById(R.id.fridge_foodlist_recyclerview));
 
-        FridgeFoodListAdapter fridgeFoodListAdapter = new FridgeFoodListAdapter((FoodSpace.foodSpaces[0].foodItems));
+        FridgeFoodListAdapter fridgeFoodListAdapter = new FridgeFoodListAdapter((foodItems));
         fridgeFoodListRecyclerView.setAdapter(fridgeFoodListAdapter);
 
         fridgeFoodListAdapter.setListener((FridgeFoodListAdapter.Listener)getActivity());

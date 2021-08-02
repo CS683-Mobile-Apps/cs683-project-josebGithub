@@ -20,12 +20,16 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 
+import edu.bu.metcs.myproject.Database.MyFoodManagerDBContract;
+import edu.bu.metcs.myproject.Database.MyFoodManagerDao;
+
 /**
  * This class is a list fragment for the home page
  */
 public class HomePageListFragment extends ListFragment {
 
     private final static String TAG = HomePageListFragment.class.getSimpleName ();
+    private static MyFoodManagerDao myFoodManagerDao;
     ListView listview;
     View view;
 
@@ -35,6 +39,7 @@ public class HomePageListFragment extends ListFragment {
 
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState)
     {
+
         view = inflater.inflate(R.layout.foodspace_list_fragment, container, false);
 
         Log.d(TAG, "onCreateView: " + savedInstanceState);
@@ -42,36 +47,14 @@ public class HomePageListFragment extends ListFragment {
             //ArrayList<FoodSpaces> foodSpaces = new ArrayList<>();
 
             Log.d(TAG, "Create Food Space: " + savedInstanceState);
-            //Create Food Spaces
-            String[] foodSpacesArray = {FoodSpace.foodSpaces[0].getTitle().toString(), FoodSpace.foodSpaces[1].getTitle().toString(),
-                    FoodSpace.foodSpaces[2].getTitle().toString(), FoodSpace.foodSpaces[3].getTitle().toString()};
 
-            //Create Food Items
-            Date expiryDate = null;
-            SimpleDateFormat sDate = new SimpleDateFormat("MM/dd/yyyy");
-            try {
-                expiryDate = sDate.parse("07/30/2021");
-            } catch (ParseException e) {
-                e.printStackTrace();
-            }
-            FoodItem foodItem1 = new FoodItem("Cheddar Cheese", "Dairy", expiryDate, "12 pieces", 5.60);
-            FoodItem foodItem2 = new FoodItem("Salmon", "Fish", expiryDate, "1", 10.80);
-
-            //Add Item to Refrigerator
-            Log.d(TAG, "SavedInstanceState : " + savedInstanceState);
-            Log.d(TAG, "Add FOOD ITEM TO FRIDGE");
-            FoodSpace.foodSpaces[0].foodItems.add(foodItem1);
-            FoodSpace.foodSpaces[0].foodItems.add(foodItem2);
-
-            /**
-             FoodSpaces[] foodSpaces = { new FoodSpaces( "REFRIGERATOR"), new FoodSpaces("FREEZER"),
-             new FoodSpaces("PANTRY"), new FoodSpaces("KITCHEN CABINET")};
-             **/
             // ArrayAdapter<String> adapter=new ArrayAdapter<String>(getActivity(), android.R.layout.simple_list_item_1,android.R.id.text1, foodSpacesArray);
             //  setListAdapter(adapter);
-            ArrayAdapter<String> adapter = new ArrayAdapter<String>(getContext(), android.R.layout.simple_list_item_1, android.R.id.text1, foodSpacesArray);
+            myFoodManagerDao = MyFoodManagerDao.getInstance(getContext());
+            myFoodManagerDao.openDB();
+            String[] foodSpaceArray = myFoodManagerDao.getAllFoodSpaceTitles();
+            ArrayAdapter<String> adapter = new ArrayAdapter<String>(getContext(), android.R.layout.simple_list_item_1, android.R.id.text1, foodSpaceArray);
             setListAdapter(adapter);
-
 
             return super.onCreateView(inflater,container,savedInstanceState);
     }
@@ -91,6 +74,7 @@ public class HomePageListFragment extends ListFragment {
                   switch(position) {
                       case 0:
                           intent=new Intent(getContext(), RefrigeratorFoodListActivity.class);
+                          intent.putExtra("FOODSPACE_ID", position);
                           break;
                       default:
                           Toast.makeText(getActivity(), (CharSequence) listview.getItemAtPosition(position),Toast.LENGTH_LONG).show();

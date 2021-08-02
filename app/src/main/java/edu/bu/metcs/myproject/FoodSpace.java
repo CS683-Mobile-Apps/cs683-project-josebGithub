@@ -4,6 +4,7 @@ import java.util.ArrayList;
 
 public class FoodSpace {
 
+    private int id;
     private String title;
     public ArrayList<FoodItem> foodItems = new ArrayList<FoodItem>();
 
@@ -16,7 +17,11 @@ public class FoodSpace {
 
     public FoodSpace(String title) {
         this.title = title;
-        //this.foodItems = new ArrayList<>();
+    }
+
+    public FoodSpace(int id, String title) {
+        this.id = id;
+        this.title = title;
     }
 
     public ArrayList<FoodItem> getFoodItems() {
