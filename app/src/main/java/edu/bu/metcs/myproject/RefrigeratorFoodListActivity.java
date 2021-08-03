@@ -1,5 +1,7 @@
 package edu.bu.metcs.myproject;
 
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
@@ -78,10 +80,36 @@ public class RefrigeratorFoodListActivity extends AppCompatActivity implements F
     }
 
     @Override
-    public void onDeleteClick(int itemId, int foodspaceId) throws ParseException {
-        myFoodManagerDao.getInstance (getApplicationContext()).delectFoodItemById(itemId);
-        Intent intent = new Intent (this, RefrigeratorFoodListActivity.class);
-        intent.putExtra("FOODSPACE_ID", foodspaceId);
-        startActivity (intent);
+    public void onDeleteClick(final int itemId, final int foodspaceId) throws ParseException {
+        final int fooditemId = itemId;
+        AlertDialog.Builder builder = new AlertDialog.Builder(RefrigeratorFoodListActivity.this);
+        builder.setTitle("Delete Food Item");
+        builder.setMessage("Are you sure you want to delete the food item?");
+
+        //Yes Button
+        builder.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                myFoodManagerDao.getInstance (getApplicationContext()).delectFoodItemById(fooditemId);
+               // Intent intent = new Intent (this, RefrigeratorFoodListActivity.class);
+                Intent intent = new Intent (getApplicationContext(), RefrigeratorFoodListActivity.class);
+                intent.putExtra("FOODSPACE_ID", foodspaceId);
+                startActivity (intent);
+            }
+        });
+
+        //No Button
+        builder.setNegativeButton("No", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                dialog.dismiss();
+
+            }
+        });
+
+        AlertDialog alertDialog = builder.create();
+        alertDialog.show();
+
+
     }
 }
