@@ -16,6 +16,7 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 
 import edu.bu.metcs.myproject.Database.MyFoodManagerDao;
+import edu.bu.metcs.myproject.Services.UpdateDBJobIntentService;
 
 public class EditFridgeFoodItemActivity extends AppCompatActivity {
 
@@ -86,7 +87,14 @@ public class EditFridgeFoodItemActivity extends AppCompatActivity {
         Log.d("TAG", "itemId : "+itemId);
         Log.d("TAG", "foodspaceId : "+foodspaceId);
         FoodItem updatedFoodItem = new FoodItem(itemId, foodspaceId, foodName, foodType, cExpiryDate, quantity, cost);
-        myFoodManagerDao.updateFoodItemById(updatedFoodItem, itemId, foodspaceId);
+        Intent mIntent = new Intent(this, UpdateDBJobIntentService.class);
+        mIntent.putExtra("foodItem", updatedFoodItem);
+        mIntent.putExtra("itemId", itemId);
+        mIntent.putExtra("foodspaceId", foodspaceId);
+        UpdateDBJobIntentService.enqueueWork(this, mIntent);
+
+        //Since use JobIntentService, that's why comment the following line out.
+      //  myFoodManagerDao.updateFoodItemById(updatedFoodItem, itemId, foodspaceId);
         //updateFoodItem(foodspaceId, itemId, foodName, foodType, expiryDate.toString(), quantity, cost);
         Log.d(TAG, "Call RefrigeratorFoodListActivity.class");
         Intent intent1 = new Intent(this, RefrigeratorFoodListActivity.class);

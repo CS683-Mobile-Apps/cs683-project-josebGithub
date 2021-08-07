@@ -1,8 +1,9 @@
 package edu.bu.metcs.myproject;
 
+import java.io.Serializable;
 import java.util.Date;
 
-public class FoodItem {
+public class FoodItem implements Serializable {
 
     private int id;
     private int spaceId;
