@@ -5,14 +5,19 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Toast;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
+import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
+import com.google.android.material.navigation.NavigationBarView;
 
 import java.text.ParseException;
 
@@ -31,22 +36,12 @@ public class RefrigeratorFoodListActivity extends AppCompatActivity implements F
         setContentView(R.layout.activity_fridge_food_list);
 
         final int foodspaceId = getIntent().getExtras().getInt("FOODSPACE_ID");
-
         //add fragments dynamically
         //create a fragment object
-        fridgeFoodListFragment = new RefrigeratorFoodListFragment();
-        fridgeFoodListFragment.setArguments(getIntent().getExtras());
-        // get the reference to the FragmentManger object
-        FragmentManager fragManager = getSupportFragmentManager();
-        // get the reference to the FragmentTransaction object
-        FragmentTransaction transaction = fragManager.beginTransaction();
-        // add the fragment into the transaction
-        transaction.add(R.id.fridgeFoodListContainer,fridgeFoodListFragment);
-        // commit the transaction.
-        transaction.commit();
+      //  fridgeFoodListFragment = new RefrigeratorFoodListFragment();
+     //   fridgeFoodListFragment.setArguments(getIntent().getExtras());
 
-
-        FloatingActionButton foodItemAddButton = findViewById(R.id.add_float_button);
+        final FloatingActionButton foodItemAddButton = findViewById(R.id.add_float_button);
 
         foodItemAddButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -57,6 +52,63 @@ public class RefrigeratorFoodListActivity extends AppCompatActivity implements F
             }
         });
 
+
+        BottomNavigationView bottomNav = findViewById(R.id.backtomainNavigationView);
+
+        openFragment(new RefrigeratorFoodListFragment());
+
+
+        bottomNav.setOnItemSelectedListener(new NavigationBarView.OnItemSelectedListener() {
+            @Override
+            public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+
+                switch (item.getItemId()){
+
+                    case R.id.fridgeIcon:
+                        openFragment(new RefrigeratorFoodListFragment());
+                        foodItemAddButton.show();
+                        return true;
+
+                    case R.id.food_spaces_icon:
+                        openFragment(new HomePageListFragment());
+                        foodItemAddButton.hide();
+                        return true;
+
+                }
+
+                return false;
+            }
+        });
+    }
+
+    void openFragment(Fragment fragment){
+        fragment.setArguments(getIntent().getExtras());
+        // get the reference to the FragmentManger object
+        FragmentManager fragManager = getSupportFragmentManager();
+        // get the reference to the FragmentTransaction object
+        FragmentTransaction transaction = fragManager.beginTransaction();
+        // add the fragment into the transaction
+        transaction.replace(R.id.fridgeFoodListContainer, fragment);
+        transaction.addToBackStack(null);
+      //  transaction.add(R.id.fridgeFoodListContainer,fridgeFoodListFragment);
+        // commit the transaction.
+        transaction.commit();
+
+        /**
+        FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
+        fragmentTransaction.replace(R.id.frameLayout, fragment);
+        fragmentTransaction.addToBackStack(null);
+        fragmentTransaction.commit();
+         **/
+
+    }
+
+
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        // executed this when hardware back button is pressed
+        openFragment(new HomePageListFragment());
     }
 
 
@@ -80,11 +132,11 @@ public class RefrigeratorFoodListActivity extends AppCompatActivity implements F
     }
 
     @Override
-    public void onDeleteClick(final int itemId, final int foodspaceId) throws ParseException {
+    public void onDeleteClick(final int itemId, final int foodspaceId, String itemName) throws ParseException {
         final int fooditemId = itemId;
         AlertDialog.Builder builder = new AlertDialog.Builder(RefrigeratorFoodListActivity.this);
         builder.setTitle("Delete Food Item");
-        builder.setMessage("Are you sure you want to delete the food item?");
+        builder.setMessage("Are you sure you want to delete the \'"+itemName+ "\' ?");
 
         //Yes Button
         builder.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
@@ -109,7 +161,5 @@ public class RefrigeratorFoodListActivity extends AppCompatActivity implements F
 
         AlertDialog alertDialog = builder.create();
         alertDialog.show();
-
-
     }
 }

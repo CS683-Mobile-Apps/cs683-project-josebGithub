@@ -28,7 +28,7 @@ private Listener listener;
     public interface Listener {
       //  void onClick(int position);
         void onEditClick(int position, int foodspaceId) throws ParseException;
-        void onDeleteClick(int position, int foodspaceId) throws ParseException;
+        void onDeleteClick(int position, int foodspaceId, String itemName) throws ParseException;
     }
 
     public FridgeFoodListAdapter(ArrayList<FoodItem> foodItems) {
@@ -99,7 +99,9 @@ public static class FridgeFoodListViewHolder extends RecyclerView.ViewHolder  {
                     int position = getAdapterPosition();
                     if (position != RecyclerView.NO_POSITION) {
                         try {
-                            listener1.onDeleteClick(foodItems.get(position).getId(), foodItems.get(position).getSpaceId());
+                            listener1.onDeleteClick(foodItems.get(position).getId(),
+                                    foodItems.get(position).getSpaceId(),
+                                    foodItems.get(position).getName());
                         } catch (ParseException e) {
                             e.printStackTrace();
                         }

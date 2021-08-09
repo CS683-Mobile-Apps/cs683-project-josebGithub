@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:id="@+id/food_spaces_icon"
+        android:title="Food Spaces"
+        android:icon="@drawable/ic_food_spaces_icon"/>
+
+    <item
+        android:id="@+id/fridgeIcon"
+        android:title="Refrigerator"
+        android:icon="@drawable/ic_fridge_icon"/>
+
+</menu>

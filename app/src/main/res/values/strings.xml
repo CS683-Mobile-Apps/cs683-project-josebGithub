@@ -10,7 +10,11 @@
     <string name="select_date">Select Date</string>
 
     <string name="save_button">Save</string>
+    <string name="cancel_button">Cancel</string>
 
+    <string name="add_food_item_to_fridge">ADD FOOD ITEM TO REFRIGERATOR</string>
+    <string name="fridge_food_item_list">REFRIGERATOR FOOD ITEM LIST</string>
+    <string name="edit_food_item_in_fridge">EDIT FOOD ITEM IN REFRIGERATOR</string>
 
     <string-array name="food_spaces">
         <item>REFRIGERATOR</item>

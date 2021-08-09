@@ -8,14 +8,6 @@
     android:orientation="vertical"
     tools:context=".RefrigeratorFoodListActivity">
 
-    <!--
-    <FrameLayout
-        android:id="@+id/fridge_frame_layout"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentTop="true"
-        android:layout_alignParentLeft="true"/>
-     -->
 
     <FrameLayout
         android:id="@+id/fridgeFoodListContainer"
@@ -24,56 +16,28 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent">
+
     </FrameLayout>
 
-  <!--
-    <fragment
-        android:id="@+id/fridgeListFragment"
-        android:name="edu.bu.metcs.myproject.RefrigeratorFoodListFragment"
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="1"
-        tools:layout="@layout/fridge_food_list_fragment"/>
-
-   -->
-    <!--
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/add_float_button"
         android:layout_width="wrap_content"
-        android:layout_height="73dp"
-        android:layout_gravity="bottom|end"
-        android:layout_marginEnd="33dp"
-        android:layout_marginRight="36dp"
-        android:layout_marginBottom="55dp"
-        android:clickable="true"
-        app:srcCompat="@android:drawable/ic_input_add" />
-  -->
-
-
-    <com.google.android.material.floatingactionbutton.FloatingActionButton
-        android:id="@+id/add_float_button"
-        android:layout_width="wrap_content"
-        android:layout_height="100dip"
+        android:layout_height="wrap_content"
         android:layout_gravity="end|bottom"
+        android:layout_marginBottom="75dp"
+        app:elevation="0dp"
         app:srcCompat="@android:drawable/ic_input_add" />
 
 
-    <!--
-    <LinearLayout
+    <com.google.android.material.bottomnavigation.BottomNavigationView
+        android:id="@+id/backtomainNavigationView"
         android:layout_width="match_parent"
-        android:layout_height="0dip"
-        android:layout_weight="1"
-        android:gravity="end|bottom"
-        android:orientation="vertical" >
+        android:layout_height="76dp"
+        android:layout_gravity="bottom"
+        app:itemIconTint="@color/blue"
+        app:itemTextColor="@color/black"
+        android:background="@color/gray"
+        app:menu="@menu/backtomain_nav_menu" />
 
-        <com.google.android.material.floatingactionbutton.FloatingActionButton
-            android:id="@+id/add_float_button"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="end|bottom"
-            android:clickable="true"
-            app:srcCompat="@android:drawable/ic_input_add" />
-    </LinearLayout>
-    -->
 
 </FrameLayout>

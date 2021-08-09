@@ -20,7 +20,7 @@ public class MyFoodManagerDBHelper extends SQLiteOpenHelper {
         Log.d(TAG, "Create Tables...");
 
         String insertFridgeStmt = "INSERT INTO "+MyFoodManagerDBContract.MyFoodManagerContract.FOOD_SPACE_TABLE_NAME+
-                " VALUES "+"(0,'REFRIDGERATOR')";
+                " VALUES "+"(0,'REFRIGERATOR')";
 
         String insertFreezerStmt = "INSERT INTO "+MyFoodManagerDBContract.MyFoodManagerContract.FOOD_SPACE_TABLE_NAME+
                 " VALUES "+"(1,'FREEZER')";

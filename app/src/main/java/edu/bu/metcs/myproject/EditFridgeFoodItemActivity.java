@@ -6,6 +6,7 @@ import androidx.fragment.app.FragmentTransaction;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
@@ -59,17 +60,34 @@ public class EditFridgeFoodItemActivity extends AppCompatActivity {
 
         EditText foodNameView = findViewById(R.id.foodNameId);
         String foodName = foodNameView.getText().toString();
+        if(TextUtils.isEmpty(foodName)) {
+            foodNameView.setError("Food Name cannot be empty.");
+            return;
+        }
 
        // Spinner spinner = (Spinner) findViewById(R.id.foodTypeSpinnerId);
         EditText foodTypeView = findViewById(R.id.foodTypeId);
         String foodType = foodTypeView.getText().toString();
+        if(TextUtils.isEmpty(foodType) || (foodType.equals("Select"))) {
+            foodTypeView.setError("Food Type cannot be empty.");
+            return;
+        }
 
         EditText expiryDateView = findViewById(R.id.expiryDateId);
         String cExpiryDate = expiryDateView.getText().toString();
+        if(TextUtils.isEmpty(cExpiryDate)) {
+            expiryDateView.setError("Food expiry date cannot be empty.");
+            return;
+        }
+
         //Date expiryDate = new SimpleDateFormat("MM/dd/yyyy").parse(cExpiryDate);
 
         EditText quantityEditView = findViewById(R.id.quantityId);
         String quantity = quantityEditView.getText().toString();
+        if(TextUtils.isEmpty(quantity)) {
+            quantityEditView.setError("Food quantity 1 bagcannot be empty.");
+            return;
+        }
 
         EditText costEditView= findViewById(R.id.costId);
         String dCost = costEditView.getText().toString();
@@ -82,6 +100,11 @@ public class EditFridgeFoodItemActivity extends AppCompatActivity {
                 // this means it is not double
                 e.printStackTrace();
             }
+        }
+
+        if(TextUtils.isEmpty(dCost)) {
+            costEditView.setError("Food cost cannot be empty.");
+            return;
         }
 
         Log.d("TAG", "itemId : "+itemId);
@@ -108,6 +131,15 @@ public class EditFridgeFoodItemActivity extends AppCompatActivity {
         FoodSpace.foodSpaces[foodspaceId].foodItems.get(itemId).setExpirationDate(expiryDate);
         FoodSpace.foodSpaces[foodspaceId].foodItems.get(itemId).setQuantity(quantity);
         FoodSpace.foodSpaces[foodspaceId].foodItems.get(itemId).setCost(cost);
+    }
+
+    public void onClickCancel(View view) throws ParseException {
+
+        foodspaceId = getIntent().getIntExtra("foodspaceId", -1);
+        Log.d(TAG, "Call RefrigeratorFoodListActivity.class");
+        Intent intent = new Intent(this, RefrigeratorFoodListActivity.class);
+        intent.putExtra("FOODSPACE_ID", foodspaceId);
+        startActivity(intent);
     }
 
 }
