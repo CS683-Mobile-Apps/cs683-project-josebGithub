@@ -42,14 +42,9 @@ public class HomePageListFragment extends ListFragment {
 
         view = inflater.inflate(R.layout.foodspace_list_fragment, container, false);
 
-        Log.d(TAG, "onCreateView: " + savedInstanceState);
-
             //ArrayList<FoodSpaces> foodSpaces = new ArrayList<>();
 
             Log.d(TAG, "Create Food Space: " + savedInstanceState);
-
-            // ArrayAdapter<String> adapter=new ArrayAdapter<String>(getActivity(), android.R.layout.simple_list_item_1,android.R.id.text1, foodSpacesArray);
-            //  setListAdapter(adapter);
             myFoodManagerDao = MyFoodManagerDao.getInstance(getContext());
             myFoodManagerDao.openDB();
             String[] foodSpaceArray = myFoodManagerDao.getAllFoodSpaceTitles();

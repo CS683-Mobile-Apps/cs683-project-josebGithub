@@ -125,6 +125,7 @@ public class EditFridgeFoodItemActivity extends AppCompatActivity {
         startActivity(intent1);
     }
 
+
     public void updateFoodItem(int foodspaceId, int itemId, String foodName, String foodType, String expiryDate, String quantity, Double cost) {
         FoodSpace.foodSpaces[foodspaceId].foodItems.get(itemId).setName(foodName);
         FoodSpace.foodSpaces[foodspaceId].foodItems.get(itemId).setType(foodType);
@@ -132,6 +133,7 @@ public class EditFridgeFoodItemActivity extends AppCompatActivity {
         FoodSpace.foodSpaces[foodspaceId].foodItems.get(itemId).setQuantity(quantity);
         FoodSpace.foodSpaces[foodspaceId].foodItems.get(itemId).setCost(cost);
     }
+
 
     public void onClickCancel(View view) throws ParseException {
 

@@ -8,6 +8,7 @@ public class FoodSpace {
     private String title;
     public ArrayList<FoodItem> foodItems = new ArrayList<FoodItem>();
 
+
     //public final static Project[] projects = {
     public static FoodSpace[] foodSpaces = {
             new FoodSpace("REFRIGERATOR"), new FoodSpace("FREEZER"),
@@ -39,9 +40,6 @@ public class FoodSpace {
     public void setTitle(String title) {
         this.title = title;
     }
-
-
-
 
     @Override
     public String toString() {

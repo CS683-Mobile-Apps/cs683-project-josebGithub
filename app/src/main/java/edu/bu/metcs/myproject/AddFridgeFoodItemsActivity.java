@@ -73,7 +73,8 @@ public class AddFridgeFoodItemsActivity extends AppCompatActivity {
 
          EditText expiryDateView = findViewById(R.id.expiryDateId);
          String cExpiryDate = expiryDateView.getText().toString();
-         //Date expiryDate = new SimpleDateFormat("MM/dd/yyyy").parse(cExpiryDate);
+        // Date expiryDate = new SimpleDateFormat("MM/dd/yyyy").parse(cExpiryDate);
+
          Log.d(TAG, "expiryDate : "+ cExpiryDate);
          if(TextUtils.isEmpty(cExpiryDate)) {
             expiryDateView.setError("Food expiry date cannot be empty.");

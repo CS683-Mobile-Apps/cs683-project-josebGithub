@@ -5,8 +5,10 @@ import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.util.Log;
+import android.widget.Toast;
 
 import java.util.ArrayList;
+import java.util.Date;
 
 import edu.bu.metcs.myproject.FoodItem;
 import edu.bu.metcs.myproject.FoodSpace;
@@ -246,6 +248,31 @@ public class MyFoodManagerDao {
 
         cursor.close();
         return foodspaceId;
+    }
+
+    public ArrayList<String> getFridgeFoodItemByExpiryDate(String expiryDate) {
+
+        ArrayList<String> foodItem=new ArrayList<String>();
+        String[] fooditemValues = {
+                MyFoodManagerDBContract.MyFoodManagerContract.COLUMN_FOOD_NAME};
+
+        String selection = MyFoodManagerDBContract.MyFoodManagerContract.COLUMN_FOOD_EXPIRY_DATE + " = ?";
+        String[] selectionArgs = {expiryDate};
+
+        Cursor cursor = mReadableDB.query(MyFoodManagerDBContract.MyFoodManagerContract.FOOD_ITEM_TABLE_NAME,
+                fooditemValues, selection, selectionArgs, null, null, null);
+
+        Log.d("TAG", "Querying expiry food items...");
+       while (cursor.moveToNext()) {
+           String fooditemName = cursor.getString(cursor.getColumnIndex(MyFoodManagerDBContract.MyFoodManagerContract.COLUMN_FOOD_NAME));
+           Log.d("TAG", "fooditemId : " + fooditemName);
+           foodItem.add(fooditemName);
+       }
+       if (foodItem == null) {
+           Log.d("TAG", "No food items are going to expire...");
+       }
+        cursor.close();
+        return foodItem;
     }
 
 }

@@ -60,58 +60,58 @@ private Listener listener;
         return foodItems.size();
     }
 
-public static class FridgeFoodListViewHolder extends RecyclerView.ViewHolder  {
+    public static class FridgeFoodListViewHolder extends RecyclerView.ViewHolder  {
 
-    private TextView fridgeFoodListView;
-    private CardView fridgeFoodListCardView;
-    private ImageView mEditImage, mDeleteImage;
+        private TextView fridgeFoodListView;
+        private CardView fridgeFoodListCardView;
+        private ImageView mEditImage, mDeleteImage;
 
-    public FridgeFoodListViewHolder(View itemView, final Listener listener1, final ArrayList<FoodItem> foodItems) {
-        super(itemView);
-        fridgeFoodListCardView = (CardView)itemView;
-        fridgeFoodListView = (TextView) itemView.findViewById(R.id.foodNameTextViewId);
-        mEditImage = itemView.findViewById(R.id.edit_image);
+        public FridgeFoodListViewHolder(View itemView, final Listener listener1, final ArrayList<FoodItem> foodItems) {
+            super(itemView);
+            fridgeFoodListCardView = (CardView)itemView;
+            fridgeFoodListView = (TextView) itemView.findViewById(R.id.foodNameTextViewId);
+            mEditImage = itemView.findViewById(R.id.edit_image);
 
-        mEditImage.setOnClickListener(new View.OnClickListener() {
+            mEditImage.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View v) {
-                if (listener1 != null) {
-                    int position = getAdapterPosition();
-                   // int foodspace = 0;
-                  //  int itemId = position;
-                    if (position != RecyclerView.NO_POSITION) {
-                        try {
-                            listener1.onEditClick(foodItems.get(position).getId(), foodItems.get(position).getSpaceId());
-                        } catch (ParseException e) {
-                            e.printStackTrace();
-                        }
+                public void onClick(View v) {
+                    if (listener1 != null) {
+                        int position = getAdapterPosition();
+                        // int foodspace = 0;
+                         //  int itemId = position;
+                        if (position != RecyclerView.NO_POSITION) {
+                            try {
+                                listener1.onEditClick(foodItems.get(position).getId(), foodItems.get(position).getSpaceId());
+                            } catch (ParseException e) {
+                                e.printStackTrace();
+                            }
                         //listener1.onEditClick(position, 0, itemId);
+                         }
                     }
                 }
-            }
-        });
+            });
 
-        mDeleteImage = itemView.findViewById(R.id.delete_image);
-        mDeleteImage.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if (listener1 != null) {
-                    int position = getAdapterPosition();
-                    if (position != RecyclerView.NO_POSITION) {
-                        try {
-                            listener1.onDeleteClick(foodItems.get(position).getId(),
+            mDeleteImage = itemView.findViewById(R.id.delete_image);
+            mDeleteImage.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    if (listener1 != null) {
+                        int position = getAdapterPosition();
+                        if (position != RecyclerView.NO_POSITION) {
+                            try {
+                                listener1.onDeleteClick(foodItems.get(position).getId(),
                                     foodItems.get(position).getSpaceId(),
                                     foodItems.get(position).getName());
-                        } catch (ParseException e) {
-                            e.printStackTrace();
+                            } catch (ParseException e) {
+                                e.printStackTrace();
+                            }
                         }
                     }
                 }
-            }
-        });
+            });
 
+        }
     }
-}
 
     public void setListener(Listener listener) {
         this.listener = listener;

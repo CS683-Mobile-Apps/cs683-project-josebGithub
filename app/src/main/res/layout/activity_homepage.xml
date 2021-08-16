@@ -18,17 +18,4 @@
         android:layout_alignParentTop="true"
         android:layout_alignParentLeft="true"/>
 
-
-  <!--
-        <com.google.android.material.bottomnavigation.BottomNavigationView
-            android:id="@+id/backtomainNavigationView"
-            android:layout_width="match_parent"
-            android:layout_height="76dp"
-            android:background="@color/gray"
-            android:layout_alignParentBottom="true"
-            app:itemIconTint="@color/blue"
-            app:itemTextColor="@color/black"
-            app:menu="@menu/backtomain_nav_menu" />
-  -->
-
 </RelativeLayout>

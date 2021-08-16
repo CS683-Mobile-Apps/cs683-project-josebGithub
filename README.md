@@ -1,5 +1,4 @@
 # CS683 Project  - MyFoodManager
-Briefly describe your app.
 
 ##Overview of MyFoodManager
     Most people waste more food than they think. We waste more than a third of our food
@@ -15,3 +14,10 @@ the foods. It can keep track of what you’ve bought, how much you have spent fo
 foods, how much you have wasted for food and provides notifications when the food
 items are going to expire. Any person hoping to regulate their food buying is a
 potential user.
+
+
+
+##Design
+
+<img width="1069" alt="MyFoodManger Design" src="https://user-images.githubusercontent.com/46608139/129611188-e7aecdcd-0b01-4b8f-a984-23a3e8d57fce.png" />
+

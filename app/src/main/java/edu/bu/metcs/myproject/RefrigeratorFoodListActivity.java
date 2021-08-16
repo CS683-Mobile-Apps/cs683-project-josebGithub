@@ -36,10 +36,6 @@ public class RefrigeratorFoodListActivity extends AppCompatActivity implements F
         setContentView(R.layout.activity_fridge_food_list);
 
         final int foodspaceId = getIntent().getExtras().getInt("FOODSPACE_ID");
-        //add fragments dynamically
-        //create a fragment object
-      //  fridgeFoodListFragment = new RefrigeratorFoodListFragment();
-     //   fridgeFoodListFragment.setArguments(getIntent().getExtras());
 
         final FloatingActionButton foodItemAddButton = findViewById(R.id.add_float_button);
 
@@ -93,14 +89,6 @@ public class RefrigeratorFoodListActivity extends AppCompatActivity implements F
       //  transaction.add(R.id.fridgeFoodListContainer,fridgeFoodListFragment);
         // commit the transaction.
         transaction.commit();
-
-        /**
-        FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
-        fragmentTransaction.replace(R.id.frameLayout, fragment);
-        fragmentTransaction.addToBackStack(null);
-        fragmentTransaction.commit();
-         **/
-
     }
 
 

@@ -16,6 +16,9 @@
     <string name="fridge_food_item_list">REFRIGERATOR FOOD ITEM LIST</string>
     <string name="edit_food_item_in_fridge">EDIT FOOD ITEM IN REFRIGERATOR</string>
 
+    <string name="channel_name">MyFoodManger</string>
+    <string name="channel_description">Food item is going to expire</string>
+
     <string-array name="food_spaces">
         <item>REFRIGERATOR</item>
         <item>FREEZER</item>

@@ -13,4 +13,5 @@
         android:layout_height="match_parent"
         android:background="@color/holo_blue_light"
         android:entries="@array/food_spaces" />
+
 </LinearLayout>

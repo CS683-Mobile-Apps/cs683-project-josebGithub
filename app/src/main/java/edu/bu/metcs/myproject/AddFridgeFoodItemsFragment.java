@@ -98,8 +98,15 @@ public class AddFridgeFoodItemsFragment extends Fragment {
                             @Override
                             public void onDateSet(DatePicker datePicker, int year, int monthOfYear, int dayOfMonth) {
                                 // set day of month , month and year value in the edit text
-                                expiryDate.setText((monthOfYear + 1) + "/"
-                                        + dayOfMonth + "/" + year);
+                                String monthString = String.valueOf(monthOfYear+1);
+                                if (monthString.length() == 1) {
+                                    monthString = "0"+ monthString;
+                                }
+                                expiryDate.setText(monthString + "/"
+                                                + dayOfMonth + "/" + year);
+
+                               // expiryDate.setText((monthOfYear + 1) + "/"
+                                //        + dayOfMonth + "/" + year);
                             }
                         }, mYear, mMonth, mDay);
                 datePickerDialog.show();

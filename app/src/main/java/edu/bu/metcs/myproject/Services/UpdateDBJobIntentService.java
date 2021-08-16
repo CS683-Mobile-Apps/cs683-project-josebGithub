@@ -35,10 +35,10 @@ public class UpdateDBJobIntentService extends JobIntentService {
             FoodItem foodItem = (FoodItem) intent.getSerializableExtra("foodItem");
             int itemId = intent.getIntExtra("itemId", -1);
             int foodspaceId = intent.getIntExtra("foodspaceId", -1);
-            postToastMsg("Update fooditem...");
+            //postToastMsg("Update fooditem...");
             myFoodManagerDao.updateFoodItemById(foodItem, itemId, foodspaceId);
 
-            postToastMsg("Update for "+foodItem.getName()+" is finished");
+            //postToastMsg("Update for "+foodItem.getName()+" is finished");
         }
 
         public void postToastMsg(final String msg) {
