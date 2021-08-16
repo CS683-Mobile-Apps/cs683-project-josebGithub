@@ -1,6 +1,8 @@
 # CS683 Project  - MyFoodManager
 
 ##Overview of MyFoodManager
+
+
     Most people waste more food than they think. We waste more than a third of our food
 a year, it’s not only waste food, but money as well. Do you know? 1 in 9 Americans are
 food insecure. People goes food shopping without knowing that they already have the
