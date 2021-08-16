@@ -1,7 +1,6 @@
 # CS683 Project  - MyFoodManager
 
-##Overview of MyFoodManager
-
+## Overview 
 
     Most people waste more food than they think. We waste more than a third of our food
 a year, it’s not only waste food, but money as well. Do you know? 1 in 9 Americans are
@@ -19,7 +18,7 @@ potential user.
 
 
 
-##Design
+## Design
 
 <img width="1069" alt="MyFoodManger Design" src="https://user-images.githubusercontent.com/46608139/129611188-e7aecdcd-0b01-4b8f-a984-23a3e8d57fce.png" />
 
